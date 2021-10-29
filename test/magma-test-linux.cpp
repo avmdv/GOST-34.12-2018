@@ -78,20 +78,19 @@ void test_A_3_4 () {
             cout << "G[K" + to_string(i+1) + "]..G[K1]";
             break;
         }
-        cout << "(a1,a0) = ";
-        cout << "(" << hex << a.a1 << "," << a.a0 << ")" << endl;
+        cout << "(a1,a0) = " << "(" << hex << a.a1 << "," << a.a0 << ")" << endl;
     }
     cout << "Результатом зашифрования является шифртекст b=G*[K32]G[K31]..G[K1] = " << hex << cipher.G_(cipher.K[31], a) << endl;
 }
 
 // decryption algorithm
 void test_A_3_5 () {
-    V32xV32 a = {0x4ee901e5, 0xc2d8ca3d};
+    V32xV32 b = {0x4ee901e5, 0xc2d8ca3d};
     cout << endl << "А.3.5 Алгоритм расшифрования" << endl;
-    cout << "(b1,b0)=(" << hex << a.a1 << "," << a.a0 << endl;
+    cout << "(b1,b0)=(" << hex << b.a1 << "," << b.a0 << endl;
 
     for (int i=31;i>0;i--) {
-        a = cipher.G(cipher.K[i], a);
+        b = cipher.G(cipher.K[i], b);
         switch (i+1) {
         case 32:
             cout << "G[K32]";
@@ -103,8 +102,7 @@ void test_A_3_5 () {
             cout << "G[K" + to_string(i+1) + "]..G[K32]";
             break;
         }
-        cout << "(b1,b0) = ";
-        cout << "(" << hex << a.a1 << "," << a.a0 << ")" << endl;
+        cout << "(b1,b0) = " << "(" << hex << b.a1 << "," << b.a0 << ")" << endl;
     }
-    cout << "Результатом расшифрования является открытый текст a=G*[K1]G[K2]..G[K32] = " << hex << cipher.G_(cipher.K[0], a) << endl;
+    cout << "Результатом расшифрования является открытый текст a=G*[K1]G[K2]..G[K32] = " << hex << cipher.G_(cipher.K[0], b) << endl;
 }
